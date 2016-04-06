@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<title>About School</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<!--js material-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<!--Import Google Icon Font-->
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--modify css-->
+<link href="css/modify.css" rel="stylesheet" type="text/css"/>
+<!--about school css-->
+<link rel="stylesheet" href="css/abtschool.css">
+<!--bootstrap-->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<!--events css-->
+<link rel="stylesheet" href="css/events.css">
+<!--script-->
+<script src="js/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<header>
+		<img src="images/logo.png" />
+		<section class="main">
+			<form class="search" method="post" action="index.html" >
+				<input type="text" name="q" placeholder="" />
+				<ul class="results" >
+					<li><a href="index.html">Marathi Shala No.1<br /><span>Saphale</span></a></li>
+					<li><a href="index.html">Marol BMC School<br /><span>Andheri(E)</span></a></li>
+				</ul>
+			</form>
+		</section>
+		<div class="login_button">
+			<button type="button" class="btn btn-success btn-sm" id="logout"><a>Logout</a></button>
+		</div>			
+	</header>
+	<div class="gap">
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-sm-12">
+			<div class="schooltitle">Marathi Shala No.1</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-1 col-sm-1 col-md-1"></div>
+			<div class="col-xs-10 col-md-10 col-sm-10 picture">
+				<img src="images/abt.jpg"  class="img-responsive"  />
+			</div>
+		<div class="col-xs-1 col-sm-1 col-md-1"></div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-6 col-sm-6 col-md-6">
+			<img src="images/clock.png" width=30px height=30px align=left></img>
+			<div class="office">
+				<P>10 am - 6pm</P>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-6">
+			<img src="images/address.png" width=30px height=30px align=left></img>
+			<div class="office">
+				<P>SAPHALE</P>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="home-button">
+	<a class="btn-floating btn-large waves-effect waves-#43a047 green darken-1" href="eventAfterLogin.html"><i class="material-icons">home</i></a>
+</div>
+
+
+    <div class="page-footer">			
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="afterLoginFacilities.html"><img src="images/facilityF.jpg" /></a>
+			</div>	
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="afterLoginAboutSchool.html"><img src="images/about schoolF.png" /></a>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="afterLoginSmc.html"><img src="images/SMC.jpg" /></a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	
+	
+	$(document).ready(function(){
+
+		$("#logout").click(function(){
+			window.location.href = "logout.html";
+		});
+			
+		$.ajax({
+			url: 'LogoutServlet',
+			type : 'POST',
+			dataType : 'json',
+			data : JSON.stringify({
+				"action"   : "checkAuthenticity"
+			}),
+			processData : false,
+			success : function(data, textStatus,
+					jQxhr) {
+					if(data.msg === 'unauthorised'){
+						window.location.href = "eventBeforeLogin.html"
+					}
+			},
+			error : function(jqXhr, textStatus,
+					errorThrown) {
+				console.log(jqXhr);
+			}
+		});
+	});
+	</script>
+</body>
+</html>

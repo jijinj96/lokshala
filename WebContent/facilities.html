@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<title>facilities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<!--modify css-->
+<link href="css/modify.css" rel="stylesheet" type="text/css"/>
+<!--events css-->
+<link rel="stylesheet" href="css/events.css">
+<!--bootstrap-->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<!--script-->
+<script src="js/jquery-1.11.0.min.js"></script>
+<!--js material-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<!--Import Google Icon Font-->
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--script-->
+<script src="js/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+	<header>
+		<img src="images/logo.png" />
+		<section class="main">
+			<form class="search" method="post" action="index.html" >
+				<input type="text" name="q" placeholder="" id="search"/>
+				
+			</form>
+		</section>
+		<div class="login_button">
+			<button type="button" class="btn btn-success btn-sm" id="login"><a>Login</a></button>
+			<button type="button" class="btn btn-success btn-sm" id="signup"><a>Sign Up</a></button>
+		</div>			
+	</header>
+	
+	<!--Events-->
+	<div class="col-sm-12 events">
+		<h1><center>Facilities</center></h1>
+	</div>
+	<!--all events-->
+	<div class="container" style="width:90%;" id="facilities">
+	
+	</div>
+<!--floating buttons-->
+<div class="feedback-button">
+		<a class="btn-floating btn-large waves-effect waves-#43a047 green darken-1" href="query.html"><i class="material-icons">email</i></a>
+	</div>
+
+<div class="home-button">
+	<a class="btn-floating btn-large waves-effect waves-#43a047 green darken-1" href="eventBeforeLogin.html"><i class="material-icons">home</i></a>
+</div>
+
+    <div class="page-footer">			
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="#"><img src="images/facilityClick.png" /></a>
+			</div>	
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="aboutSchool.html"><img src="images/about schoolF.png" /></a>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="Smc.html"><img src="images/SMC.jpg" /></a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$("#login").click(function(){
+		console.log('Hello');
+		window.location.href="login.html"
+	});
+	$("#signup").click(function(){
+		console.log('Hello');
+		window.location.href="register.html"
+	});
+$(document).ready(function(){
+		
+		$.ajax({
+			url: 'FacilityServlet',
+			type : 'POST',
+			dataType : 'json',
+			data : JSON.stringify({
+				"action"   : 'facility'
+			}),
+			processData : false,
+			success : function(data, textStatus,
+					jQxhr) {
+					$.each(data.facility,function(){
+						$('#facilities').append('<div class="f" id="'+this['facility_id']+'" data-keywords = "'+this['facility_name']+'"><div class="row ent" style="margin-top:7%"><div class="col-sm-2"><img src="'+this['image']+'" alt="event1" class="img" /></div><div class="col-sm-10"><div class="span4 collapse-group"><h2>'+this['facility_name']+'</h2></div></div><div class="col-sm-12 feedback"><div class="col-md-3 col-sm-3 col-xs-3" data-value="0" facility-id="'+this['facility_id']+'"><a class="frown" href="#"><i class="fa fa-frown-o fa-border"></i></a></div><div class="col-md-3 col-sm-3 col-xs-3" data-value="1" facility-id="'+this['facility_id']+'"><a class="meh" href="#"><i class="fa fa-meh-o fa-border"></i></a></div><div class="col-md-3 col-sm-3 col-xs-3" data-value="2" facility-id="'+this['facility_id']+'"><a class="smile" href="#"><i class="fa fa-smile-o fa-border"></i></button></a></div><div class="col-md-3 col-sm-3 col-xs-3"><a class="comment" href="#"><i class="fa fa-comments-o fa-border"></i></button></a></div></div></div></div>');
+					});
+			},
+			error : function(jqXhr, textStatus,
+					errorThrown) {
+				console.log(errorThrown);
+			}
+		});
+		
+		$("#search").keyup(function(){
+			var query = $('#search').val();
+			if(query != ""){
+				$('.container .f').hide();
+				$('.container .f').each(function(){
+					var keyword = $(this).attr('data-keywords');
+					if(keyword.indexOf(query) >= 0){
+						$(this).show();
+					}
+					
+				});
+			}
+			else{
+				$('.container .f').show();
+			}
+		});
+		$('.container').on('click','.f .feedback div',function(e){
+			window.location.href = "login.html";
+		});
+	});
+	
+
+	</script>
+</body>
+</html>

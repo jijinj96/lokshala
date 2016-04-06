@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Events</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--modify css-->
+<link href="css/modify.css" rel="stylesheet" type="text/css"/>
+<!--bootstrap-->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<!--script-->
+<script src="js/jquery-1.11.0.min.js"></script>
+<!--events css-->
+<link rel="stylesheet" href="css/events.css">
+<!--script-->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+	<header>
+		<img src="images/logo.png" />
+		<section class="main">
+			<form class="search" method="post" action="index.html" >
+				<input type="text" name="q" placeholder="" id="search" />
+			</form>
+		</section>
+		<div class="login_button">
+			<button type="button" class="btn btn-success btn-sm" id="login"><a>Login</a></button>
+			<button type="button" class="btn btn-success btn-sm" id="signup"><a>Sign Up</a></button>
+		</div>			
+	</header>
+	<!--Events-->
+	<div class="col-sm-12 events">
+		<h1><center>Events</center></h1>
+	</div>
+<!--all events-->
+<div class="container" style="width:90%;" id="allevents">
+
+</div>
+    <div class="page-footer">			
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="facilities.html"><img src="images/facilityF.jpg" /></a>
+			</div>	
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="aboutSchool.html"><img src="images/about schoolF.png" /></a>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">
+			<div class="footer-image">
+				<a href="Smc.html"><img src="images/SMC.jpg" /></a>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	$("#login").click(function(){
+		window.location.href="login.html"
+	});
+	$("#signup").click(function(){
+		window.location.href="register.html"
+	});
+	$('.container').on('click','.e .feedback div',function(e){
+		window.location.href = "login.html";
+	});
+	
+	$(document).ready(function(){
+		
+		$.ajax({
+			url: 'EventsServlet',
+			type : 'POST',
+			dataType : 'json',
+			data : JSON.stringify({
+				"action"   : 'events'
+			}),
+			processData : false,
+			success : function(data, textStatus,
+					jQxhr) {
+					$.each(data.events,function(){
+						$("#allevents").append('<div data-keywords='+this['title']+' class="e"><div class="row ent"  style="margin-top:7%"><div class="col-sm-2"><img src="'+this['image']+'" alt="event1" class="img" /></div><div class="col-sm-10"><div class="span4 collapse-group"><h2>'+this['title']+'</h2><p class="collapse">'+this['description']+'</p><p><a class="btn" href="#">View details &raquo;</a></p></div></div><div class="col-sm-12 feedback"><div class="col-md-3 col-sm-3 col-xs-3"><a class="frown" href="#"><i class="fa fa-frown-o fa-border"></i></a></div><div class="col-md-3 col-sm-3 col-xs-3"><a class="meh" href="#"><i class="fa fa-meh-o fa-border"></i></a></div><div class="col-md-3 col-sm-3 col-xs-3"><a class="smile" href="#"><i class="fa fa-smile-o fa-border"></i></button></a></div><div class="col-md-3 col-sm-3 col-xs-3"><a class="comment" href="#"><i class="fa fa-comments-o fa-border"></i></button></a></div></div></div></div>');
+					});
+						
+			},
+			error : function(jqXhr, textStatus,
+					errorThrown) {
+				console.log(errorThrown);
+			}
+		});
+	});
+	</script>
+		<script>
+		$('.container').on('click','.row .btn',function(e){
+			e.preventDefault();
+		    var $this = $(this);
+		    var $collapse = $this.closest('.collapse-group').find('.collapse');
+		    $collapse.collapse('toggle');
+		});
+		$("#search").keyup(function(){
+			var query = $('#search').val();
+			if(query != ""){
+				$('.container .e').hide();
+				$('.container .e').each(function(){
+					var keyword = $(this).attr('data-keywords');
+					if(keyword.indexOf(query) >= 0){
+						$(this).show();
+					}
+					
+				});
+			}
+			else{
+				$('.container .e').show();
+			}
+		});
+		</script>
+</script>
+</body>
+</html>

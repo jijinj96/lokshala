@@ -1,0 +1,91 @@
+.hr{
+margin-top:7%
+}
+.events h1{
+	font-size:150%;
+}
+.events{
+	z-index:-10;
+	padding-bottom:10px;
+	position:fixed;
+}
+.events h1{
+	font-weight:800;
+	align:center;
+}
+.img{
+	width:100%;
+	height:25%;
+	padding-top: 5%;
+}
+.ent{
+	border:solid 1px ! important;
+	padding:1% 0% 0% 0%;
+	box-shadow: 1px 1px 5px !important;
+}
+.feedback{
+	border-top: solid 1px !important;
+}
+.imgcomment{
+    height: 5%;
+    padding: 1% 5% 1% 0%;
+	padding-left:5%;
+}
+.comment{
+	height:4%;
+	margin: 0% 0% 0% 27%;
+	
+}
+.comment {
+  background: #002266;
+  color: #fff;
+  font-size: 1.75em;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+.comment:hover,
+.comment:focus {
+  background: #003300;
+  color: #fff;
+  outline: 0;
+}
+
+.frown {
+  background: #002266;
+  color: #fff;
+  font-size: 1.75em;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+.frown:hover,
+.frown:focus {
+  background: #e60000;
+  color: #fff;
+  outline: 0;
+}
+.meh{
+  background: #002266;
+  color: #fff;
+  font-size: 1.75em;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+.meh:hover,
+.meh:focus {
+  background: #ff9933;
+  color: #fff;
+  outline: 0;
+}
+.smile{
+  background: #002266;
+  color: #fff;
+  font-size: 1.75em;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+.smile:hover,
+.smile:focus {
+  background: #00b300;
+  color: #fff;
+  outline: 0;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			url: 'LogoutServlet',
+			type : 'POST',
+			dataType : 'json',
+			data : JSON.stringify({
+				"action"   : 'logout'
+			}),
+			processData : false,
+			success : function(data, textStatus,
+					jQxhr) {
+				
+					if(data.msg === 'Logout'){
+						window.location.href = "eventBeforeLogin.html"
+					}
+			},
+			error : function(jqXhr, textStatus,
+					errorThrown) {
+				console.log(errorThrown);
+			}
+		});
+	});
+	
+</script>
+</body>
+</html>

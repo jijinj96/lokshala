@@ -1,0 +1,35 @@
+
+.schooltitle {
+	
+	text-align: center;
+	color: #002266;
+	font-family: serif;
+	font-style: Monotype Corsiva;
+	font-size: 2em;
+	font-weight:600;
+	text-decoration: none;
+}
+.office
+{
+	
+	
+	text-align: center;
+	color: #002266;
+	font-family: serif;
+	font-style: Monotype Corsiva;
+	font-size: 1em;
+	font-weight:600;
+	text-decoration: none;
+}
+.gap
+{
+	
+	position: absolute;
+	top: 20%;
+	padding-bottom:70px;
+	
+}
+.picture{
+	padding:5% 0;
+	
+}
